@@ -1,0 +1,22 @@
+"use strict";
+var express = require('express');
+var path = require('path');
+var stylus = require('stylus');
+var routes = require('./routes/index');
+var logger = require('express-logger');
+var errorHandler = require('express-errorhandler');
+var http = require('http');
+var app = express();
+var server = http.createServer(app);
+var printLogger = require('./middlewares/logRequest');
+app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(stylus.middleware(path.join(__dirname, 'public')));
+app.use(logger({ path: path.join(__dirname, 'logs.txt') }));
+app.use(printLogger);
+app.get('/', routes.index);
+server.listen(app.get('port'), function () {
+    console.log('Express server is listening on port ' + app.get('port'));
+});
