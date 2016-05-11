@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "version": "node -v"
   },
   "author": "",
   "license": "ISC",
@@ -16,8 +17,8 @@
     "express-favicon": "^1.0.1",
     "express-logger": "0.0.3",
     "express-method-override": "0.0.3",
-    "jade": "^1.11.0",
     "nib": "^1.1.0",
+    "pug": "^2.0.0-alpha7",
     "router": "^1.1.4",
     "stylus": "^0.54.5",
     "typescript": "^1.8.10"

@@ -3,12 +3,15 @@
 /// <reference path="./Scripts/typings/express/express.d.ts" />
 /// <reference path="./Scripts/typings/node/node.d.ts" />
 /// <reference path="./Scripts/typings/stylus/stylus.d.ts" />
+/// <reference path="./Scripts/typings/mongoose/mongoose.d.ts" />
 
 //Import various node modules
 import express = require('express'); //Express  web framework
 import path = require('path'); //to work with various path related operations
 import stylus = require('stylus'); //A language to write css programatically
 import routes = require('./routes/index');
+import mongoose = require('mongoose');
+var config = require('./config');
 
 var logger = require('express-logger'); //Express logger to save log files
 var errorHandler = require('express-errorhandler');
@@ -18,7 +21,7 @@ var server = http.createServer(app); //Create http web server
 var printLogger = require('./middlewares/logRequest'); //Custom middleware to print request data on console
 var pug = require('pug');
 
-app.set('port',process.env.PORT || 3000);
+app.set('port',config.PORT);
 app.set('view engine','pug');
 app.set('views', path.join(__dirname,'views'));
 app.use(express.static(path.join(__dirname,'public')));
