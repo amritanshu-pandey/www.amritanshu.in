@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var stylus = require('stylus');
 var routes = require('./routes/index');
+var user_routes = require('./routes/user');
+var mongoose = require('mongoose');
 var config = require('./config');
 var logger = require('express-logger');
 var errorHandler = require('express-errorhandler');
@@ -18,7 +20,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(stylus.middleware(path.join(__dirname, 'public')));
 app.use(logger({ path: path.join(__dirname, 'logs.txt') }));
 app.use(printLogger);
+mongoose.connect(config.db_dev);
 app.get('/', routes.index);
+app.get('/create_user', user_routes.create_user);
 server.listen(app.get('port'), function () {
     console.log('Express server is listening on port ' + app.get('port'));
 });

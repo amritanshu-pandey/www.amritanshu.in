@@ -10,6 +10,7 @@ import express = require('express'); //Express  web framework
 import path = require('path'); //to work with various path related operations
 import stylus = require('stylus'); //A language to write css programatically
 import routes = require('./routes/index');
+import user_routes = require('./routes/user');
 import mongoose = require('mongoose');
 var config = require('./config');
 
@@ -29,7 +30,10 @@ app.use(stylus.middleware(path.join(__dirname,'public')));
 app.use(logger({path: path.join(__dirname,'logs.txt')}));
 app.use(printLogger); //Use app level custom middleware to print the request data on console
 
+mongoose.connect(config.db_dev);
+
 app.get('/', routes.index);
+app.get('/create_user', user_routes.create_user);
 
 server.listen(app.get('port'), function(){
   console.log('Express server is listening on port '+app.get('port'));
