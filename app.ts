@@ -16,9 +16,10 @@ var http = require('http'); //HTTP webserver
 var app = express(); //Create the instance of express application
 var server = http.createServer(app); //Create http web server
 var printLogger = require('./middlewares/logRequest'); //Custom middleware to print request data on console
+var pug = require('pug');
 
 app.set('port',process.env.PORT || 3000);
-app.set('view engine','jade');
+app.set('view engine','pug');
 app.set('views', path.join(__dirname,'views'));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(stylus.middleware(path.join(__dirname,'public')));
