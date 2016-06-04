@@ -21,6 +21,7 @@ var app = express(); //Create the instance of express application
 var server = http.createServer(app); //Create http web server
 var printLogger = require('./middlewares/logRequest'); //Custom middleware to print request data on console
 var pug = require('pug');
+var bodyParser = require('body-parser');
 
 app.set('port',config.PORT);
 app.set('view engine','pug');
@@ -29,11 +30,17 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(stylus.middleware(path.join(__dirname,'public')));
 app.use(logger({path: path.join(__dirname,'logs.txt')}));
 app.use(printLogger); //Use app level custom middleware to print the request data on console
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
 
 mongoose.connect(config.db_dev);
 
 app.get('/', routes.index);
 app.get('/create_user', user_routes.create_user);
+app.post('/create_user',user_routes.create_user;
 
 server.listen(app.get('port'), function(){
   console.log('Express server is listening on port '+app.get('port'));

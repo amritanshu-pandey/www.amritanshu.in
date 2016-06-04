@@ -1,4 +1,32 @@
 extends layout
 block content
     h1(class="banner_heading").
-      Create new user
+        Create new user
+    br
+    form(class='col-sm-12 form-horizontal', action="create_user", method="POST")
+        fieldset(class='form-group')
+          label(for="fName") First Name
+          input(type="text" id="fName" class="form-control" name='fName')
+        fieldset(class='form-group')
+          label(for="lName") Last Name
+          input(type="text" id="lName" class="form-control" name='lName')
+        fieldset(class='form-group')
+          label(for="email") Email
+          input(type="email" id="email" class="form-control" name='email')
+        fieldset(class='form-group password')
+          label(for="passwordfield") Password
+          div(class='row')
+            div(class='col-sm-11')
+              input(type="password" id="passwordfield" class="form-control" name="password")
+            div(class='col-sm-1')
+              span(class='pwd-visiblity' onclick='sayHello') Show
+        fieldset(class='form-group')
+          label(for="cPassword") Confirm Password
+          input(type="password" id="cPassword" class="form-control")
+        fieldset(class='form-group')
+          label(for="isAdmin") Give administrator rights to this user?
+          select(id="isAdmin" class="form-control" name='isAdmin')
+            option Yes
+            option No
+        fieldset(class='form-group')
+          input(type="submit" id="submitBtn" class="btn btn-default")
