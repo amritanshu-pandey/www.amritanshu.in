@@ -3,3 +3,5 @@ private
 logs.txt
 logs*.txt
 db
+logs
+

@@ -14,6 +14,8 @@ import user_routes = require('./routes/user');
 import mongoose = require('mongoose');
 var config = require('./config');
 
+var passport = require('passport');
+var expressSession = require('express-session');
 var logger = require('express-logger'); //Express logger to save log files
 var errorHandler = require('express-errorhandler');
 var http = require('http'); //HTTP webserver
@@ -32,6 +34,9 @@ app.use(logger({path: path.join(__dirname,'logs.txt')}));
 app.use(printLogger); //Use app level custom middleware to print the request data on console
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSession({secret:"Secret"}));
+app.use(passport.initialize());
+app.use(passport.session());
 // app.use(bodyParser.urlencoded({
 //   extended: true
 // }));
@@ -40,7 +45,7 @@ mongoose.connect(config.db_dev);
 
 app.get('/', routes.index);
 app.get('/create_user', user_routes.create_user);
-app.post('/create_user',user_routes.create_user;
+app.post('/create_user',user_routes.create_user);
 
 server.listen(app.get('port'), function(){
   console.log('Express server is listening on port '+app.get('port'));
